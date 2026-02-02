@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>For my Lia😘😘</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            font-family: 'Arial', sans-serif;
+            background-color: #ffe6e6;
+            margin: 0;
+            overflow: hidden;
+            text-align: center;
+            padding: 20px;
+            touch-action: manipulation;
+        }
+
+        #main-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+        }
+
+        h1 {
+            color: #ff4d6d;
+            font-size: 2rem;
+            margin-bottom: 30px;
+        }
+
+        /* Container para magkatabi sa simula */
+        .buttons-container {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            height: 50px;
+        }
+
+        button {
+            font-size: 1.2rem;
+            padding: 15px 30px;
+            cursor: pointer;
+            border-radius: 50px;
+            border: none;
+            font-weight: bold;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            transition: 0.2s;
+        }
+
+        #yesBtn {
+            background-color: #ff4d6d;
+            color: white;
+            z-index: 10;
+        }
+
+        #noBtn {
+            background-color: #808080;
+            color: white;
+            position: relative; /* Relative muna para magkatabi sila */
+            z-index: 100;
+            white-space: nowrap;
+        }
+
+        #celebration-container {
+            display: none;
+            width: 100%;
+            animation: popIn 0.5s ease;
+        }
+
+        video {
+            width: 100%;
+            max-width: 400px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            margin-top: 15px;
+        }
+
+        @keyframes popIn {
+            0% { transform: scale(0.5); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+
+    <div id="main-container">
+        <h1 id="questionText">Will you be my Valentine, Lia? ❤️</h1>
+        <div class="buttons-container">
+            <button id="yesBtn" onclick="showSurprise()">Yes</button>
+            <button id="noBtn" onclick="annoyUser()">No</button>
+        </div>
+    </div>
+
+    <div id="celebration-container">
+        <h1 style="color: #ff4d6d;">MWAHHH! THANK YOU, LIA! 💖</h1>
+        <h2>'Di na kita papaiyakin, promise!</h2>
+        <video id="myVideo" controls>
+            <source src="c:\Users\namel\OneDrive\Videos\liavideo.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+    </div>
+
+    <script>
+        // SUNOD-SUNOD NA WORDS
+        const messages = [
+            "Bawallll!", "ISA!", "Sure ka na ba?", "Think wisely, Babe...", "Teluk!", "IHHHHH!", 
+            "Wrong button po!", "Yes na lang kasi!", "DALAWA!", "Ayaw mo talaga?", "BYEEEEE!"
+        ];
+        
+        let messageIndex = 0; // Para sa pagkakasunod-sunod
+
+        function annoyUser() {
+            const noBtn = document.getElementById('noBtn');
+            
+            // 1. Gawing absolute/fixed pagkatapos ng unang click para makalipad
+            noBtn.style.position = 'fixed';
+
+            // 2. Sunod-sunod na paglabas ng text
+            noBtn.innerText = messages[messageIndex];
+            messageIndex = (messageIndex + 1) % messages.length; // Babalik sa simula pag tapos na
+
+            // 3. Smart Random Position (Safe Area)
+            const padding = 40;
+            const btnWidth = noBtn.offsetWidth;
+            const btnHeight = noBtn.offsetHeight;
+            
+            const maxX = window.innerWidth - btnWidth - padding;
+            const maxY = window.innerHeight - btnHeight - padding;
+
+            const randomX = Math.max(padding, Math.floor(Math.random() * maxX));
+            const randomY = Math.max(padding, Math.floor(Math.random() * maxY));
+
+            noBtn.style.left = randomX + 'px';
+            noBtn.style.top = randomY + 'px';
+        }
+
+        function showSurprise() {
+            document.getElementById('main-container').style.display = 'none';
+            document.getElementById('celebration-container').style.display = 'block';
+            document.getElementById('myVideo').play();
+        }
+    </script>
+
+</body>
+</html>
